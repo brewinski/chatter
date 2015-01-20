@@ -8,7 +8,7 @@
     <body>
       <h1>Hello Yo Git!</h1>
 
-      <h2>Christopher Brewin</h2>
+      <h2>Chris Brewin</h2>
       <ol>
         <li>Chicken</li>
         <li>Beef</li>
@@ -47,6 +47,8 @@
           <tr>
         </tbody>
       </table>
+      <img src="snowboarding_image_index.jpg" />
+      <p><b>Address:</b> 75 Gordonia Drive Regents Park <br /> 4118 QLD Australia</p>
     </body>
    
   </html>
