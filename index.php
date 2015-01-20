@@ -13,7 +13,7 @@
         <li>Chicken</li>
         <li>Beef</li>
         <li>Apples</li>
-        <li>grapes></li>
+        <li>grapes</li>
       </ol>
 
       <table>
@@ -49,6 +49,7 @@
       </table>
       <img src="snowboarding_image_index.jpg" />
       <p><b>Address:</b> 75 Gordonia Drive Regents Park <br /> 4118 QLD Australia</p>
+      <a href="secondWebPage.php">Link To Second Page</a>
     </body>
    
   </html>
