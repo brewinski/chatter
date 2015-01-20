@@ -6,7 +6,8 @@
     </head>
       
     <body>
-      <h1>Hello World</h1>
+      <h1>Hello Yo Git!</h1>
+
       <h2>Chris Brewin</h2>
       <ol>
         <li>Chicken</li>
@@ -14,6 +15,7 @@
         <li>Apples</li>
         <li>grapes></li>
       </ol>
+
       <table>
         <thead>
           <tr>
