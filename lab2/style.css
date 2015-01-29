@@ -1,0 +1,77 @@
+@font-face{
+  font-family: "Myriad-Pro";
+  src: url(http://www.anaveer.in/honda/font/MYRIADPRO-REGULAR.OTF) format("truetype");
+}
+html {
+  background: lightgrey;
+}
+body {
+  font-family: Myriad-Pro;
+}
+#body-wrapper {
+  width: 1150px;
+  margin: 0 auto;
+  position: relative;
+}
+.post-container {
+  width: 800px;
+  margin-top: 25px;
+  padding: 10px;
+
+  background-color: #fff;
+  -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
+}
+.post-user-details {
+  width: 170px;
+  border-right: 1px solid lightgrey;
+  float: left;
+  margin-right: 20px;
+}
+.post-comment-information {
+  width: 600px;
+  float: left;
+}
+.post-clear {
+  clear: both;
+}
+.post-container .post-comment-information img {
+  max-width: 600px;
+  margin: auto;
+}
+#posts-container {
+  float: left;
+}
+#profile-navigation {
+  float: left;
+  width: 300px;
+  margin-top: 25px;
+  margin-right: 10px;
+  padding: 10px;
+
+  background-color: #fff;
+  -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
+}
+#profile-navigation #profile-detail-navigation li {
+  background: lightgrey;
+}
+
+#head-wrapper {
+  width: 100%;
+  height: 125px;
+  background: #FFF;
+}
+#headder-navigation-bar {
+  width: 1150px;
+  margin: 0 auto;
+  position: relative;
+}
+#headder-navigation-logo img{
+  height: 125px;
+}
+#headder-navigation-gloabl {
+
+}
