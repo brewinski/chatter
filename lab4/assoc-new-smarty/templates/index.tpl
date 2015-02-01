@@ -1,9 +1,9 @@
-<!DOCTYPE html>
-<!-- Home page of PM database search example. -->
+<!DOCTYPE HTML>
+<!-- Home page of associative array search example. -->
 <html>
 <head>
   <title>Associative array search example</title>
-  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <link rel="stylesheet" type="text/css" href="styles/wp.css">
 </head>
 
@@ -13,7 +13,8 @@
 
   <form method="get" action="results.php">
   <table>
-    <tr><td>Name: </td><td><input type="text" name="name"></td></tr>
+    <tr><td>Name or year or state: </td>
+        <td><input type="text" name="query"></td></tr>
     <tr><td colspan=2><input type="submit" value="Search">
                       <input type="reset" value="Reset"></td></tr>
   <table>
@@ -21,8 +22,9 @@
 
   <hr>
   <p>
-    Source:
-    <a href="show.php?file=index.html">index.html</a> 
+    Sources:
+    <a href="show.php?file=index.php">index.php</a> 
+    <a href="show.php?file=templates/index.tpl">templates/index.tpl</a> 
   </p>
 </body>
 </html>
