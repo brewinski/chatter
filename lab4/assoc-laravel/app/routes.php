@@ -25,10 +25,8 @@ Route::get('/', function()
 Route::get('search', function()
 {
   $name = Input::get('name');
-  $year = Input::get('year');
-  $state = Input::get('state');
 
-  $results = search($name, $year, $state);
+  $results = search($name);
 
 	return View::make('pms.results')->withPms($results);
 });
@@ -37,37 +35,17 @@ Route::get('search', function()
 /* Functions for PM database example. */
 
 /* Search sample data for $name or $year or $state from form. */
-function search($name, $year, $state) {
+function search($name) {
   $pms = getPms();
 
   // Filter $pms by $name
   if (!empty($name)) {
     $results = array();
     foreach ($pms as $pm) {
-      if (stripos($pm['name'], $name) !== FALSE) {
-        $results[] = $pm;
-      }
-    }
-    $pms = $results;
-  }
-
-  // Filter $pms by $year
-  if (!empty($year)) {
-    $results = array();
-    foreach ($pms as $pm) {
-      if (strpos($pm['from'], $year) !== FALSE || 
-          strpos($pm['to'], $year) !== FALSE) {
-        $results[] = $pm;
-      }
-    }
-    $pms = $results;
-  }
-
-  // Filter $pms by $state
-  if (!empty($state)) {
-    $results = array();
-    foreach ($pms as $pm) {
-      if (stripos($pm['state'], $state) !== FALSE) {
+      if (stripos($pm['name'], $name) !== FALSE || 
+          stripos($pm['address'], $name) !== FALSE || 
+          stripos($pm['email'], $name) !== FALSE || 
+          stripos($pm['phone'], $name) !== FALSE) {
         $results[] = $pm;
       }
     }
