@@ -17,12 +17,12 @@ Associative array search results page
 
 <table class="bordered">
 <thead>
-<tr><th>No.</th><th>Name</th><th>Address</th><th>Phone</th><th>Email</th></tr>
+<tr><th>No.</th><th>Name</th><th>Start</th><th>Finish</th><th>Party</th><th>Duration</th><th>State</th></tr>
 </thead>
 <tbody>
 
 @foreach($pms as $pm)
-  <tr><td>{{{ $pm['index'] }}}</td><td>{{{ $pm['name'] }}}</td><td>{{{ $pm['address'] }}}</td><td>{{{ $pm['phone'] }}}</td><td>{{{ $pm['email'] }}}</td></tr>
+  <tr><td>{{{ $pm->number }}}</td><td>{{{ $pm->name }}}</td><td>{{{ $pm->start }}}</td><td>{{{ $pm->finish }}}</td><td>{{{ $pm->party }}}</td><td>{{{ $pm->duration }}}</td><td>{{{ $pm->state }}}</td></tr>
 @endforeach
 
 </tbody>

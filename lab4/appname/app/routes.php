@@ -10,8 +10,13 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
+ require "models/posts-model.php";
 
 Route::get('/', function()
 {
-	return View::make('pages.profile');
+  $posts = getPosts();
+  
+	return View::make('pages.profile')->withposts($posts);
 });
+
+?>

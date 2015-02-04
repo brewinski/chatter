@@ -15,6 +15,7 @@
 require "models/pms.php";
 
 
+
 // Display search form
 Route::get('/', function()
 {
@@ -37,20 +38,7 @@ Route::get('search', function()
 /* Search sample data for $name or $year or $state from form. */
 function search($name) {
   $pms = getPms();
-
   // Filter $pms by $name
-  if (!empty($name)) {
-    $results = array();
-    foreach ($pms as $pm) {
-      if (stripos($pm['name'], $name) !== FALSE || 
-          stripos($pm['address'], $name) !== FALSE || 
-          stripos($pm['email'], $name) !== FALSE || 
-          stripos($pm['phone'], $name) !== FALSE) {
-        $results[] = $pm;
-      }
-    }
-    $pms = $results;
-  }
-
+  $pms = DB::select("select * from pms where name like '%{$name}%' or start like '%{$name}%' or finish like '%{$name}%' or state like '%{$name}%'");
   return $pms;
 }
