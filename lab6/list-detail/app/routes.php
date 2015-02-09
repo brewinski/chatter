@@ -90,7 +90,7 @@ function get_items()
 {
   $sql = "select * from item";
   $items = DB::select($sql);
-  return $items[0];
+  return $items;
 }
 
 /* Gets item with the given id */

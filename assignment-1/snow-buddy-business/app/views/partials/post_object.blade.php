@@ -1,4 +1,3 @@
-
 <div class="row post-row">
     <div class="row">
       <div class="col-md-3">
@@ -16,12 +15,12 @@
     </div>
     <div class="row">
       <div class="col-md-1">
-        <a class="btn btn-danger" href="{{url("comments/$post->id")}}" role="button"><span class="glyphicon glyphicon-comment"></span> Comments ({{{htmlspecialchars($post->id)}}})</a>
+        <a class="btn btn-danger" href="{{{url('comments/' . $post->id)}}}" role="button"><span class="glyphicon glyphicon-comment"></span> Comments ({{{$post->count}}})</a>
       </div>
       <div class="col-md-9"></div>
       <div class="col-md-2">
-        <a class="btn btn-link pull-right" href="{{url("delete_post_action/$post->id")}}" role="button"><span class="glyphicon glyphicon-trash"></span></a>
-        <a class="btn btn-link pull-right" href="{{url("update_post/$post->id")}}" role="button"><span class="glyphicon glyphicon-edit"></span></a>
+        <a class="btn btn-link pull-right" href="{{url('delete_post_action/' . $post->id)}}" role="button"><span class="glyphicon glyphicon-trash"></span></a>
+        <a class="btn btn-link pull-right" href="{{url('update_post/' . $post->id)}}" role="button"><span class="glyphicon glyphicon-edit"></span></a>
       </div>
     </div>
 </div>

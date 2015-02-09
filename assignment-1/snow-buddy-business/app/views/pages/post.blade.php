@@ -41,8 +41,9 @@ Chatter
 @section('content')
 
 <div class="container" id="post-container">
+  
   @foreach($posts as $post)
-    @include('partials.post_object')
+    @include('partials.post_single')
   @endforeach
 </div>
 

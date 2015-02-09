@@ -19,7 +19,11 @@ Route::get('/', function()
 Route::get('post', function()
            {
              $posts = get_posts();
-
+             foreach($posts as $post)
+             {
+               $count = count(get_comments($post->id));
+               $post->count = $count;
+             }
              return View::make('pages.post')->withPosts($posts);
            });
 
@@ -32,7 +36,7 @@ Route::post('add_post_action', function()
               {
                 add_post($user, $title, $message);
               }
-              
+
               return Redirect::to(url("post"));
             });
 
@@ -46,8 +50,10 @@ Route::get('delete_post_action/{id}', function($id)
 Route::get('update_post/{id}', function($id) 
            {
              $post = get_post($id);
-
-             return View::make('pages.update_post')->withPost($post);
+             $comments = get_comments($id);
+             $count = count(get_comments($post->id));
+             $post->count = $count;
+             return View::make('pages.update_post')->withPost($post)->withComments($comments);
            });
 
 Route::post('update_post_action', function()
@@ -56,7 +62,7 @@ Route::post('update_post_action', function()
               $user = Input::get('name');
               $title = Input::get('title');
               $message = Input::get('message');
-              
+
               if(!empty($title) && !empty($message))
               {
                 update_post($id, $user, $title, $message);
@@ -68,7 +74,8 @@ Route::get('comments/{id}', function($id)
            {
              $post = get_post($id);
              $comments = get_comments($id);
-      
+             $count = count(get_comments($post->id));
+             $post->count = $count;
              return View::make('pages.comments')->withPost($post)->withComments($comments);
            });
 
@@ -77,9 +84,9 @@ Route::post('add_comment_action', function()
               $id = Input::get('id');
               $user = Input::get('name');
               $message = Input::get('message');
-              
+
               add_comment($id, $user, $message);
-              
+
               return Redirect::to(url("comments/$id"));
             });
 
@@ -91,6 +98,7 @@ Route::get('delete_comment/{id}/{postid}', function($id, $postid)
            });
 
 // Comments Functions
+
 function delete_comment($id)
 {
   $sql = "delete from comments where id = ?";
@@ -99,13 +107,13 @@ function delete_comment($id)
 function delete_comments($id)
 {
   $sql = "delete from comments where postid = ?";
-  
+
   DB::delete($sql, array($id));
-  
+
 }
 function get_comment($cid) {
   $sql = "select postid from comments where id = ?";
-  
+
   DB::select($sql, array($cid));
 }
 function get_comments($id)
@@ -135,7 +143,7 @@ function delete_post($id)
 {
   $sql = "delete from posts where id = ? ";
   DB::delete($sql, array($id));
-  
+
   delete_comments($id);
 }
 
