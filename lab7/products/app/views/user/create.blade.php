@@ -1,10 +1,10 @@
-{{Form::model($product, array('method' => 'PUT', 'route' => array('user.store')))}}
+{{Form::open(array('route' => array('user.store')))}}
 {{Form::label('username', 'User Name')}}
 {{Form::text('username');}}
 
-{{Form::label('price', 'price')}}
-{{Form::text('price')}}
+{{Form::label('password', 'Password')}}
+{{Form::password('password')}}
 
-{{ Form::submit('Edit') }}
+{{ Form::submit('Create') }}
 
 {{Form::close()}}

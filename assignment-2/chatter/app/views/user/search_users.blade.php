@@ -10,12 +10,11 @@ Chatter
 </div>
 @stop
 @section('content')
-
 <div class="container" id="post-container">
-
-  @foreach($posts as $post)
-  @include('partial.post_object')
-  @endforeach
+@foreach($users as $user)
+  @include('partial.user_object')
+@endforeach
 </div>
 
 @stop
+

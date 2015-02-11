@@ -1,12 +1,17 @@
 <?php
 
-class UserController extends \BaseController {
+class CommentController extends \BaseController {
 
   /**
 	 * Display a listing of the resource.
 	 *
 	 * @return Response
 	 */
+
+  public static $rules = array(
+    'message' => 'required'
+  );
+
   public function index()
   {
     //
@@ -20,7 +25,7 @@ class UserController extends \BaseController {
 	 */
   public function create()
   {
-    return View::make('user.create');
+    //
   }
 
 
@@ -31,15 +36,27 @@ class UserController extends \BaseController {
 	 */
   public function store()
   {
+    $comment = new Comment();
+
     $input = Input::all();
-    $password = $input['password'];
-    $encrypted = Hash::make($password);
+    $name = Auth::user()->first_name . " " . Auth::user()->last_name;
+    $v = Validator::make($input, CommentController::$rules);
 
-    $user = new User;
-    $user->username = $input['username'];
-    $user->password = $encrypted;
-    $user->save();
+    if($v->passes())
+    {
+      $comment->name = $name;
+      $comment->message = $input['message'];
+      $comment->post_id = $input['post_id'];
+      $comment->user_id = Auth::user()->id;
 
+      $comment->save();
+
+      return Redirect::to(URL::previous());
+    }
+    else
+    {
+      return Redirect::to(URL::previous())->withErrors($v);
+    }
   }
 
 
@@ -51,7 +68,7 @@ class UserController extends \BaseController {
 	 */
   public function show($id)
   {
-    //
+
   }
 
 
@@ -87,25 +104,10 @@ class UserController extends \BaseController {
 	 */
   public function destroy($id)
   {
-    //
-  }
-
-  public function login()
-  {
-    $input = Input::all();
-    $password = $input['password'];
-    $username = $input['username'];
-    if (Auth::attempt(array('username' => $username, 'password' => $password)))
-    {
-      return Redirect::to(URL::previous());
-    }
-    return $errors = 'not logged in';
-  }
-
-  public function logout()
-  {
-    Auth::logout();
+    $comment = Comment::find($id);
+    $comment->delete();
     return Redirect::to(URL::previous());
   }
+
 
 }

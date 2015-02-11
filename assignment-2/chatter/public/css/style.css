@@ -56,6 +56,8 @@ ul.nav a:hover {
   border-bottom: 1px solid #337ab7;
   margin-top: 10px;
 }
-.row {
-
+.post-btn {
+  background-color: transparent;
+  border: none;
+  color: #337ab7;
 }

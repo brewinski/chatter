@@ -3,34 +3,34 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePostsTable extends Migration {
+class CreateCommentsTable extends Migration {
 
-  /**
+	/**
 	 * Run the migrations.
 	 *
 	 * @return void
 	 */
-  public function up()
-  {
-    Schema::create('posts', function($table)
+	public function up()
+	{
+		    Schema::create('comments', function($table)
                    {
                      $table->increments('id');
+                     $table->integer('post_id');
                      $table->integer('user_id');
-                     $table->string('title');
+                     $table->string('name');
                      $table->string('message');
-                     $table->string('status');
                      $table->timestamps();
                    });
-  }
+	}
 
-  /**
+	/**
 	 * Reverse the migrations.
 	 *
 	 * @return void
 	 */
-  public function down()
-  {
-    //
-  }
+	public function down()
+	{
+		//
+	}
 
 }

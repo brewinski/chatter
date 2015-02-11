@@ -7,9 +7,24 @@ class PostController extends \BaseController {
 	 *
 	 * @return Response
 	 */
+  public static $rules = array(
+    'title' => 'required|min:3',
+    'message' => 'required'
+  );
+
   public function index()
   {
-    $posts = Post::all();
+    $posts = Post::orderBy('created_at', 'desc')->get();
+
+    foreach($posts as $post)
+    {
+      $user = User::find($post->user_id);
+      $name = $user->first_name . " " . $user->last_name;
+      $post->user = $name;
+      $count = count($post->comments()->get());
+      $post->count = $count;
+    }
+
     return View::make('page.post', compact('posts'));
   }
 
@@ -32,17 +47,28 @@ class PostController extends \BaseController {
 	 */
   public function store()
   {
+
     $post = new Post();
 
     $input = Input::all();
 
-    $post->user = $input['name'];
-    $post->title = $input['title'];
-    $post->message = $input['message'];
-    
-    $post->save();
-    $posts = Post::all();
-    return View::make('page.post', compact('posts'));
+    $v = Validator::make($input, PostController::$rules);
+
+    if($v->passes())
+    {  
+      $post->title = $input['title'];
+      $post->message = $input['message'];
+      $post->user_id = Auth::user()->id;
+      $post->status = $input['status'];
+      $post->save();
+      $posts = Post::all();
+
+      return Redirect::to(URL::previous());
+    }
+    else
+    {
+      return Redirect::to(URL::previous())->withErrors($v);
+    }
 
   }
 
@@ -55,7 +81,13 @@ class PostController extends \BaseController {
 	 */
   public function show($id)
   {
-    //
+    $post = Post::find($id);
+    $user = User::find($post->user_id);
+    $name = $user->first_name . " hi " . $user->last_name;
+    $post->user = $name;
+    $count = count($post->comments()->get());
+    $post->count = $count;
+    return View::make('page.update_post')->withPost($post);
   }
 
 
@@ -67,7 +99,8 @@ class PostController extends \BaseController {
 	 */
   public function edit($id)
   {
-    //
+    $post = Post::find($id);
+    return View::make('page.update_post')->withPost($post);
   }
 
 
@@ -79,7 +112,26 @@ class PostController extends \BaseController {
 	 */
   public function update($id)
   {
-    //
+    $post = Post::find($id);
+
+    $input = Input::all();
+
+    $v = Validator::make($input, PostController::$rules);
+
+    if($v->passes())
+    {
+      $post->user_id = Auth::user()->id;
+      $post->title = $input['title'];
+      $post->message = $input['message'];
+      $post->status = $input['status'];
+      $post->save();
+
+      return Redirect::to(URL::previous());
+    }
+    else
+    {
+      return Redirect::to(URL::previous())->withErrors($v);
+    }
   }
 
 
@@ -91,8 +143,32 @@ class PostController extends \BaseController {
 	 */
   public function destroy($id)
   {
-    //
+    $post = Post::find($id);
+    $comments = $post->comments()->get();
+    foreach($comments as $comment)
+      $comment->delete();
+
+    $post->delete();
+    return Redirect::to('post');
   }
 
+  /**
+	 * Display the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+  public function getPostComment($id)
+  {
+    $post = Post::find($id);
+    $comments = $post->comments()->orderBy('created_at', 'desc')->get();
+    $user = User::find($post->user_id);
+    $name = $user->first_name . " " . $user->last_name;
+    $post->user = $name;
+    $count = count($comments);
+    $post->count = $count;
+
+    return View::make('page.post_comment')->withPost($post)->withComments($comments);
+  }
 
 }
