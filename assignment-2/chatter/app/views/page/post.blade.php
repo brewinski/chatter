@@ -17,5 +17,5 @@ Chatter
   @include('partial.post_object')
   @endforeach
 </div>
-
+{{ link_to_route('page.doc', 'DOC') }}
 @stop

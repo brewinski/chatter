@@ -65,4 +65,5 @@ Chatter
     @endforeach
   </ul>
 </div>
+
 @stop

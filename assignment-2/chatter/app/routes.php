@@ -32,6 +32,8 @@ Route::post('user/remove_friend/{user_id}', array('as' => 'user.remove_friend', 
 
 Route::post('user/get_friends/{id}', array('as' => 'user.get_friends', 'uses' => 'UserController@get_friends'));
 
+Route::get('page/doc', array('as' => 'page.doc', 'uses' => 'UserController@doc'));
+
 Route::resource('post', 'PostController');
 Route::resource('comment', 'CommentController');
 Route::resource('user', 'UserController');

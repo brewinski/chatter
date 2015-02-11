@@ -106,7 +106,7 @@ class UserController extends \BaseController {
                                                                                             $q->where('id', '=', $ids['logedinid']);
                                                                                           });
                                                                             });
-                                                   })->get();
+                                                   })->orderBy('created_at', 'desc')->get();
     }
     else
     {
@@ -263,5 +263,8 @@ class UserController extends \BaseController {
     return Redirect::to(URL::previous());
   }
 
-
+  public function doc()
+  {
+    return View::make('page.doc');
+  }
 }

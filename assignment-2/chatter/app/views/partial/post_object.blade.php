@@ -2,6 +2,7 @@
   <div class="row">
     <div class="col-md-3">
       @if(!empty($post->user))
+      <img src="{{URL::asset('images/User_Circle.png')}}" height="75" />
       <h2>{{{htmlspecialchars($post->user)}}}</h2>
       <h5><small>Status: {{{$post->status}}}</small></h5>
       @else
